@@ -1,6 +1,6 @@
 <?php
 
-namespace Common;
+namespace Yandex_Oauth2\Common;
 
 class HttpRequestMethods extends AbstractEnum
 {
@@ -13,6 +13,6 @@ class HttpRequestMethods extends AbstractEnum
 
     public static function getMethodValidateName(string $name): bool
     {
-        return array_key_exists('HTTP_REQUEST_METHOD_'.mb_strtoupper($name), self::getValidValues());
+        return in_array('HTTP_REQUEST_METHOD_'.mb_strtoupper($name), self::getValidValues());
     }
 }

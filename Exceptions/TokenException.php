@@ -1,6 +1,6 @@
 <?php
 
-namespace Exceptions;
+namespace Yandex_Oauth2\Exceptions;
 defined('_JEXEC') or die;
 
 class TokenException extends \Exception

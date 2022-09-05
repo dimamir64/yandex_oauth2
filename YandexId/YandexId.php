@@ -1,11 +1,11 @@
 <?php
 
-namespace YandexId;
+namespace Yandex_Oauth2\YandexId;
 
-use Common\RequestTokenType;
-use Common\Token;
-use Common\YandexOauth2;
-use Exceptions\YandexOauth2Exception;
+use Yandex_Oauth2\Common\RequestTokenType;
+use Yandex_Oauth2\Common\Token;
+use Yandex_Oauth2\Common\YandexOauth2;
+use Yandex_Oauth2\Exceptions\YandexOauth2Exception;
 
 defined('_JEXEC') or die;
 

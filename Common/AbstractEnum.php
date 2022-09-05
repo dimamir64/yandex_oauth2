@@ -1,7 +1,7 @@
 <?php
 
 
-namespace  Common;
+namespace  Yandex_Oauth2\Common;
 
 defined( '_JEXEC' ) or die;
 
@@ -20,9 +20,14 @@ abstract class AbstractEnum
      * @return bool True если значение имеется, false если нет
      * @since 1.0.0
      */
-    public static function valueExists($value)
+    public static function valueExists($value): bool
     {
-        return array_key_exists($value, static::$validValues);
+        foreach (static::$validValues as $key => $e_value) {
+            if (constant('static::'.$key) === $value) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

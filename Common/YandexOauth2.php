@@ -1,8 +1,8 @@
 <?php
 
-namespace Common;
+namespace Yandex_Oauth2\Common;
 
-use Exceptions\YandexOauth2Exception;
+use Yandex_Oauth2\Exceptions\YandexOauth2Exception;
 use Joomla\CMS\Http\Http;
 use Joomla\CMS\Http\HttpFactory;
 use Joomla\CMS\Http\Response;

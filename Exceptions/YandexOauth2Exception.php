@@ -1,6 +1,6 @@
 <?php
 
-namespace Exceptions;
+namespace Yandex_Oauth2\Exceptions;
 
 class YandexOauth2Exception extends \Exception
 {

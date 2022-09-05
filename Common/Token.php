@@ -1,10 +1,10 @@
 <?php
 
-namespace Common;
+namespace Yandex_Oauth2\Common;
 
 use DateTime;
 use Exception;
-use Exceptions\TokenException;
+use Yandex_Oauth2\Exceptions\TokenException;
 
 defined('_JEXEC') or die;
 

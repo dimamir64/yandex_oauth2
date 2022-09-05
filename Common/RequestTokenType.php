@@ -1,6 +1,6 @@
 <?php
 
-namespace Common;
+namespace Yandex_Oauth2\Common;
 
 class RequestTokenType extends AbstractEnum
 {

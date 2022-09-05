@@ -1,8 +1,7 @@
 <?php
 
-namespace Common;
+namespace Yandex_Oauth2\Common;
 
-use function Yandex_Oauth2\Common\mb_strtoupper;
 
 class ServiceDomains extends AbstractEnum
 {
@@ -18,7 +17,9 @@ class ServiceDomains extends AbstractEnum
 
     public static function getServiceDomainValidateName(string $name): bool
     {
-        return array_key_exists('SERVICE_DOMAINS_'.mb_strtoupper($name), self::getValidValues());
+        $key = 'SERVICE_DOMAINS_'. mb_strtoupper($name);
+        $arr = self::getValidValues();
+        return in_array('SERVICE_DOMAINS_'. mb_strtoupper($name), self::getValidValues());
     }
 
     public static function getValue($name) {
