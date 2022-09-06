@@ -1,12 +1,28 @@
 <?php
+/*
+ * YandexOauth2.php
+ * Created for project JOOMLA 3.x
+ * package yandex_oauth2
+ * version 1.0.0
+ * https://econsultlab.ru
+ * mail: info@econsultlab.ru
+ * Released under the GNU General Public License
+ * Copyright (c) 2022 Econsult Lab.
+ */
 
 namespace Yandex_Oauth2\Common;
 
-use Yandex_Oauth2\Exceptions\YandexOauth2Exception;
 use Joomla\CMS\Http\Http;
 use Joomla\CMS\Http\HttpFactory;
 use Joomla\CMS\Http\Response;
+use Yandex_Oauth2\Exceptions\YandexOauth2Exception;
 
+/**
+ * Методы Яндекс OAUTH 2
+ * @version  1.0.0
+ * @since 1.0.0
+ * @see https://yandex.ru/dev/id/doc/dg/index.html
+ */
 class YandexOauth2
 {
 
@@ -32,11 +48,11 @@ class YandexOauth2
     protected $http = null;
 
     /**
-     * @param $clientID
-     * @param $clientSecret
+     * @param string $clientID
+     * @param string $clientSecret
      * @since 1.0.0
      */
-    public function __construct($clientID, $clientSecret)
+    public function __construct(string $clientID, string $clientSecret)
     {
         $this->setClientSecret($clientSecret);
         $this->setClientID($clientID);
@@ -45,33 +61,31 @@ class YandexOauth2
 
     /**
      * Отправка данных на сервис и получение ответа
-     * @param string $service   Имя сервиса к которому обращаемся
-     * @param string $method    Метод, который используется для обращения
-     * @param array $options    Опции соединения
-     * @param array $data   Передаваемые данные
+     * @param string $service Имя сервиса к которому обращаемся
+     * @param string $method Метод, который используется для обращения
+     * @param array $options Опции соединения
+     * @param array $data Передаваемые данные
      *
      * @return Response
      * @throws YandexOauth2Exception
      * @since 1.0.0
      */
-    protected function requestHttp(string $service, string $method, array $options, array $data):Response{
+    protected function requestHttp(string $service, string $method, array $options, array $data): Response
+    {
         $this->_setHttpOptions($options);
 
-        if(!ServiceDomains::getServiceDomainValidateName($service)){
-            throw new YandexOauth2Exception('Unknown service name',YandexOauth2Exception::YANDEX_OAUTH2_ERROR_UNKNOWN_SERVICE);
+        if (!ServiceDomains::getServiceDomainValidateName($service)) {
+            throw new YandexOauth2Exception('Unknown service name', YandexOauth2Exception::YANDEX_OAUTH2_ERROR_UNKNOWN_SERVICE);
         }
-        if(!HttpRequestMethods::getMethodValidateName($method)){
-            throw new YandexOauth2Exception('Unknown http method',YandexOauth2Exception::YANDEX_OAUTH2_ERROR_UNKNOWN_METHOD);
+        if (!HttpRequestMethods::getMethodValidateName($method)) {
+            throw new YandexOauth2Exception('Unknown http method', YandexOauth2Exception::YANDEX_OAUTH2_ERROR_UNKNOWN_METHOD);
         }
 
-        $url = 'https://'.ServiceDomains::getValue($service).'/'.$service;
-        try
-        {
+        $url = 'https://' . ServiceDomains::getValue($service) . '/' . $service;
+        try {
             $response = $this->http->$method($url, $data);
-        }
-        catch (\Exception $e)
-        {
-            throw new YandexOauth2Exception($e->getMessage(),$e->getCode());
+        } catch (\Exception $e) {
+            throw new YandexOauth2Exception($e->getMessage(), $e->getCode());
 
         }
         return $response;
@@ -79,11 +93,12 @@ class YandexOauth2
 
     /**
      * Устанавливает опции соединения к сервису
-     * @param array $options    Опции соединения
+     * @param array $options Опции соединения
      * @return void
      * @since 1.0.0
      */
-    private function _setHttpOptions(array $options){
+    private function _setHttpOptions(array $options)
+    {
         $this->http->setOption('transport.curl', $options);
     }
 
@@ -135,7 +150,7 @@ class YandexOauth2
      */
     protected function decodeErrorResponse(Response $response): array
     {
-        $result = json_decode($response->body,true);
+        $result = json_decode($response->body, true);
         if (is_array($result) && isset($result['error'])) {
             // handle a service error message
             $message = 'Service recponsed with error code "' . $result['error'] . '".';
@@ -149,16 +164,36 @@ class YandexOauth2
         return $this->getErrorResponse('Unknown error. not parsed error');
     }
 
-    protected function getErrorResponse(string $message):array {
-        return array('error'=> $message);
-    }
-
-    protected function decodeResponse(Response $response):array
+    /**
+     * Формирует ответ с сообщением об ошибке
+     * @param string $message Сообщение об ошибке
+     * @return array
+     * @since 1.0.0
+     */
+    protected function getErrorResponse(string $message): array
     {
-        return json_decode($response->body,true);
+        return array('error' => $message);
     }
 
-    protected function getResponse($result):array {
-        return array('result'=> $result);
+    /**
+     * Декодирует ответ сервиса, если нет ошибки
+     * @param Response $response
+     * @return array
+     * @since 1.0.0
+     */
+    protected function decodeResponse(Response $response): array
+    {
+        return json_decode($response->body, true);
+    }
+
+    /**
+     * Формирует ответ с полученными данными
+     * @param array $result Массив с данными
+     * @return array
+     * @since 1.0.0
+     */
+    protected function getResponse(array $result): array
+    {
+        return array('result' => $result);
     }
 }

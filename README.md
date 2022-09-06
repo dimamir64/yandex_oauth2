@@ -1,2 +1,4 @@
-# yandex_oauth2
-API wrapper to use in Joomla 3.x. See documentation https://yandex.ru/dev/id/doc/dg/index.html
+# Назначение
+АПИ для работы с Яндекс OAUTH ( см. https://yandex.ru/dev/id/doc/dg/index.html). Предназначено для использовании в Joomla 3.x. 
+# Ограничения
+Реализован механизм получения данных профиля пользователя по Яндекс.Id

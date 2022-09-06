@@ -1,4 +1,14 @@
 <?php
+/*
+ * YandexId.php
+ * Created for project JOOMLA 3.x
+ * package yandex_oauth2
+ * version 1.0.0
+ * https://econsultlab.ru
+ * mail: info@econsultlab.ru
+ * Released under the GNU General Public License
+ * Copyright (c) 2022 Econsult Lab.
+ */
 
 namespace Yandex_Oauth2\YandexId;
 
@@ -9,6 +19,11 @@ use Yandex_Oauth2\Exceptions\YandexOauth2Exception;
 
 defined('_JEXEC') or die;
 
+/**
+ * Класс запроса информации по Яндекс.ID
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 class YandexId extends YandexOauth2
 {
 
@@ -94,9 +109,7 @@ class YandexId extends YandexOauth2
             } else if ($response->code >= 400) {
                 return $this->decodeErrorResponse($response);
             }
-        } catch (YandexOauth2Exception $e) {
-            return $this->getErrorResponse('Request token responses with error: ' . $e->getMessage() . ' code:' . $e->getCode());
-        } catch (\Exception $e) {
+        } catch (YandexOauth2Exception|\Exception $e) {
             return $this->getErrorResponse('Request token responses with error: ' . $e->getMessage() . ' code:' . $e->getCode());
         }
         return $this->getErrorResponse('Request token responses with unknown error');
@@ -126,9 +139,7 @@ class YandexId extends YandexOauth2
             } else if ($response->code >= 400) {
                 return $this->decodeErrorResponse($response);
             }
-        } catch (YandexOauth2Exception $e) {
-            return $this->getErrorResponse('Request user info responses with error: ' . $e->getMessage() . ' code:' . $e->getCode());
-        } catch (\Exception $e) {
+        } catch (YandexOauth2Exception|\Exception $e) {
             return $this->getErrorResponse('Request user info responses with error: ' . $e->getMessage() . ' code:' . $e->getCode());
         }
         return $this->getErrorResponse('Request user info responses with unknown error');

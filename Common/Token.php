@@ -1,4 +1,14 @@
 <?php
+/*
+ * Token.php
+ * Created for project JOOMLA 3.x
+ * package yandex_oauth2
+ * version 1.0.0
+ * https://econsultlab.ru
+ * mail: info@econsultlab.ru
+ * Released under the GNU General Public License
+ * Copyright (c) 2022 Econsult Lab.
+ */
 
 namespace Yandex_Oauth2\Common;
 
@@ -11,6 +21,7 @@ defined('_JEXEC') or die;
 /**
  * Токен авторизации
  * @see https://yandex.ru/dev/id/doc/dg/oauth/reference/web-client.html
+ * @version 1.0.0
  * @since 1.0.0
  */
 class Token

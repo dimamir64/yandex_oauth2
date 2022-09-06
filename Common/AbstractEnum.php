@@ -1,11 +1,25 @@
 <?php
+/*
+ * AbstractEnum.php
+ * Created for project JOOMLA 3.x
+ * package yandex_oauth2
+ * version 1.0.0
+ * https://econsultlab.ru
+ * mail: info@econsultlab.ru
+ * Released under the GNU General Public License
+ * Copyright (c) 2022 Econsult Lab.
+ */
+
+namespace Yandex_Oauth2\Common;
+
+defined('_JEXEC') or die;
 
 
-namespace  Yandex_Oauth2\Common;
-
-defined( '_JEXEC' ) or die;
-
-
+/**
+ * Абстрактный класс нумератора
+ * @version 1.0.0
+ * @since 1.0.0.
+ */
 abstract class AbstractEnum
 {
     /**
@@ -23,7 +37,7 @@ abstract class AbstractEnum
     public static function valueExists($value): bool
     {
         foreach (static::$validValues as $key => $e_value) {
-            if (constant('static::'.$key) === $value) {
+            if (constant('static::' . $key) === $value) {
                 return true;
             }
         }
@@ -43,10 +57,10 @@ abstract class AbstractEnum
 
     /**
      * Возвращает значения в enum'е значения которых разрешены
-     * @return string[] Массив разрешённых значений
+     * @return array Массив разрешённых значений
      * @since 1.0.0
      */
-    public static function getEnabledValues()
+    public static function getEnabledValues(): array
     {
         $result = array();
         foreach (static::$validValues as $key => $enabled) {
@@ -65,18 +79,27 @@ abstract class AbstractEnum
      *
      * @since 1.0.0
      */
-    public static function getEnums() {
+    public static function getEnums(): array
+    {
         $result = array();
         foreach (static::$validValues as $key => $enabled) {
             if ($enabled) {
-                $result[] = array('name'=>$key,'value'=>constant('static::'.$key));
+                $result[] = array('name' => $key, 'value' => constant('static::' . $key));
             }
         }
         return $result;
     }
-    public static function getEnumName ($value){
+
+    /**
+     * Возвращает наименование нумератора по значению
+     * @param mixed $value Значение нумератора
+     * @return string|false
+     * @since 1.0.0
+     */
+    public static function getEnumName($value)
+    {
         foreach (static::$validValues as $key => $val) {
-            if ($value == constant('static::'.$key)) {
+            if ($value == constant('static::' . $key)) {
                 return $key;
             }
         }
