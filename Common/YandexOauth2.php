@@ -188,11 +188,11 @@ class YandexOauth2
 
     /**
      * Формирует ответ с полученными данными
-     * @param array $result Массив с данными
+     * @param mixed $result Данные для отправки
      * @return array
      * @since 1.0.0
      */
-    protected function getResponse(array $result): array
+    protected function getResponse($result): array
     {
         return array('result' => $result);
     }
